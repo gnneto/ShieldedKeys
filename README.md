@@ -1,5 +1,5 @@
 # ShieldedKeys
-ShieldedKeys é um projeto em desenvolvimento com o objetivo de fornecer uma solução segura para gerenciar senhas. Ele permite que os usuários armazenem suas senhas no sistema, protegendo-as com hash no banco de dados. Para visualizar uma senha, o usuário precisa fornecer uma frase de segurança.
+ShieldedKeys é um projeto em desenvolvimento baseado no framework Flask, com o objetivo de fornecer uma solução segura para gerenciar senhas. Ele permite que os usuários armazenem suas senhas no sistema, protegendo-as com hash no banco de dados. Para visualizar uma senha, o usuário precisa fornecer uma frase de segurança.
 
 ### Funcionalidades Atuais
 - Cadastro de usuários.
