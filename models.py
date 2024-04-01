@@ -28,3 +28,6 @@ class Password(db.Model):
     update_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user = db.relationship('User', backref=db.backref('passwords', lazy=True))
+
+    def check_security_phrase(self, security_phrase):
+        return self.security_phrase == security_phrase

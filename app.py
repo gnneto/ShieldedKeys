@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from routes.index_routes import baseIndex
 from routes.acesso_routes import acessoRoutes
+from routes.password_routes import passwordRoutes
 from models import db
 
 app = Flask(__name__)
@@ -17,6 +18,8 @@ db.init_app(app)
 # ROTAS BLUEPRINTS
 app.register_blueprint(baseIndex)
 app.register_blueprint(acessoRoutes)
+app.register_blueprint(passwordRoutes)
+
 
 
 
