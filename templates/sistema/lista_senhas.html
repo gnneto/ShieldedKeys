@@ -22,12 +22,15 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ password.site_name }}</h3>
                         <p class="card-text"><strong>User/ Email: </strong>{{ password.username }}<br><strong>Senha: </strong>
-                            <span id="senha-{{ password.id }}">*******</span></p>
+                            <span id="senha-{{ password.id }}">*******</span>
+                        </p>
                         <form class="d-inline-block" id="formSenha{{ password.id }}">
                             <input type="hidden" name="password_id" value="{{ password.id }}">
                             <input type="text" class="form-control mb-2" name="securityPhrase" placeholder="Frase de Segurança">
                             <button type="button" class="btn btn-primary btn-exibir-senha" data-password-id="{{ password.id }}">Exibir Senha</button>
+                            <a class="btn btn-danger btn-deletar-card" href="/deletarSenha/{{ password.id }}" data-password-id="{{ password.id }}">Deletar</a>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -35,6 +38,7 @@
         </div>
 
 
+        
 
     <!-- modal nova senha -->
     <div class="modal fade" id="addPasswordModal" tabindex="-1" aria-labelledby="addPasswordModalLabel" aria-hidden="true">
