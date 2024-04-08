@@ -9,6 +9,15 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Cadastro</h1>
+        
+        <!-- msg de erro -->
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        <!-- formulario de cadastro -->
         <form method="POST" action="/register">
             <div class="mb-3">
                 <label for="username" class="form-label">Nome de Usuário</label>

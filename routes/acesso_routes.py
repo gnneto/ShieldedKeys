@@ -9,7 +9,6 @@ acessoRoutes = Blueprint('acesso', __name__)
 @acessoRoutes.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-
         username = request.form['username']
         password = request.form['password']
         nome = request.form['nome']
@@ -18,17 +17,32 @@ def register():
         data_aniversario = datetime.strptime(request.form['data_aniversario'], '%Y-%m-%d').date()
         numero_telefone = request.form['numero_telefone']
 
+        
+        existing_user_email = User.query.filter_by(email=email).first()
+        existing_user_username = User.query.filter_by(username=username).first()
+        existing_user_telefone = User.query.filter_by(numero_telefone=numero_telefone).first()
+
+        # verifica se o email/usuraio/telefone ja existe no banco
+        if existing_user_email:
+            error_msg = "E-mail já está em uso. Por favor, escolha outro."
+            return render_template('usuario/cadastro.html', error=error_msg)
+        elif existing_user_username:
+            error_msg = "Nome de usuário já está em uso. Por favor, escolha outro."
+            return render_template('usuario/cadastro.html', error=error_msg)
+        elif existing_user_telefone:
+            error_msg = "Número de telefone já está em uso. Por favor, escolha outro."
+            return render_template('usuario/cadastro.html', error=error_msg)
+
+
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
         new_user = User(username=username, password_hash=hashed_password.decode('utf-8'), nome=nome, sobrenome=sobrenome, email=email, data_aniversario=data_aniversario, numero_telefone=numero_telefone)
         db.session.add(new_user)
         db.session.commit()
 
-        return render_template('index.html')
+        return redirect(url_for('index'))
+
     return render_template('usuario/cadastro.html')
-
-
-
 @acessoRoutes.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':

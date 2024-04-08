@@ -9,7 +9,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     nome = db.Column(db.String(100))
     sobrenome = db.Column(db.String(100))
-    email = db.Column(db.String(255))
+    email = db.Column(db.String(255), unique=True, nullable=False)
     data_aniversario = db.Column(db.Date)
     numero_telefone = db.Column(db.String(20))
 

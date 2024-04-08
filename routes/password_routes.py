@@ -14,10 +14,11 @@ def cadastrarSenha():
     
     user_id = session.get('user_id')
     user = User.query.get(user_id)
+    
+    # teste de segurança das senhas
     # user_info = f"{user.numero_telefone}{user.password_hash}"
     telfone = user.numero_telefone
     senha_hash = user.password_hash
-
     password_base64 = base64.b64encode(password_plain.encode()).decode()
     combined_info = telfone + password_base64 + senha_hash
     combined_base64 = base64.b64encode(combined_info.encode()).decode()
@@ -48,7 +49,7 @@ def exibirSenha(password_id):
         telefone = user.numero_telefone
         senha_hash = user.password_hash
         
-        
+        # teste de segurança das senhas
         password_hash = password.password_hash.replace(telefone, '').replace(senha_hash, '')
         print('password_hash', password_hash)
         
