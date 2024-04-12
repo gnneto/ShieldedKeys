@@ -5,9 +5,9 @@ ShieldedKeys é um projeto em desenvolvimento baseado no framework Flask, com o 
 - Cadastro de usuários.
 - Armazenamento seguro de senhas com hash no banco de dados.
 - Visualização de senhas apenas com a frase de segurança correspondente.
-
-### Funcionalidades Futuras
 - Aprimorar a validação durante o cadastro para garantir a integridade dos dados.
 - Implementar um gerenciamento mais completo das hashes associadas às contas de usuário.
+
+### Funcionalidades Futuras
 - Adicionar funcionalidades adicionais de segurança, como autenticação de dois fatores.
 - Melhorar a interface do usuário para uma melhor experiência de uso.
