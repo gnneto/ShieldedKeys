@@ -40,7 +40,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for('index'))
+        return redirect(url_for('index.index'))
 
     return render_template('usuario/cadastro.html')
 @acessoRoutes.route('/login', methods=['GET', 'POST'])
