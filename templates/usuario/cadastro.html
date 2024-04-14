@@ -1,57 +1,67 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Cadastro</h1>
-        
-        <!-- msg de erro -->
-        {% if error %}
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
-        </div>
-        {% endif %}
-        
-        <!-- formulario de cadastro -->
-        <form method="POST" action="/register">
-            <div class="mb-3">
-                <label for="username" class="form-label">Nome de Usuário</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" required>
-            </div>
-            <div class="mb-3">
-                <label for="sobrenome" class="form-label">Sobrenome</label>
-                <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="data_aniversario" class="form-label">Data de Aniversário</label>
-                <input type="date" class="form-control" id="data_aniversario" name="data_aniversario" required>
-            </div>
-            <div class="mb-3">
-                <label for="numero_telefone" class="form-label">Número de Telefone</label>
-                <input type="tel" class="form-control" id="numero_telefone" name="numero_telefone" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
-        </form>
-        <a class="btn btn-primary mb-3 mt-3" href="{{ url_for('acesso.login')}}">LOGIN</a>
-    </div>
+{% extends "base.html" %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% block title %}Cadastro{% endblock title %}
+{% block content %} 
+    <div class="container">
+        <div class="row mt-5 justify-content-center"></div>
+      <h1 class="text-center">Cadastro</h1>
+              <!-- msg de erro -->
+              {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+              {% endif %}
+      <div class="form-container">
+        <form method="POST" action="/register">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="nome">Nome</label>
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="Pedro" required>
+            </div>
+            <div class="form-group col">
+              <label for="sobrenome">Sobrenome</label>
+              <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Silva" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="username">Nome de Usuário</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="usuario22" required>
+            </div>
+            <div class="form-group col">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="email@exemplo.com" required>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="password">Senha</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="********" required>
+            </div>
+            <div class="form-group col">
+              <label for="confirmar_senha">Confirmar senha</label>
+              <input type="password" class="form-control" id="confirmar_senha" placeholder="********" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="data_aniversario">Data de nascimento</label>
+              <input type="date" class="form-control" id="data_aniversario" name="data_aniversario" required>
+            </div>
+            <div class="form-group col">
+              <label for="numero_telefone">Telefone</label>
+              <input type="tel" class="form-control" id="numero_telefone" name="numero_telefone" placeholder="(12) 00000-0000" required>
+            </div>
+         </div>
+         <div class="text-ceter">
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <a class="btn btn-secondary mb-3 mt-3" href="{{ url_for('acesso.login')}}">Login</a>
+            </div>
+
+        </form>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock %}

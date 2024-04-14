@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+{% block content %}
+<style>
+  .bot-border {
+    border-bottom: 1px #f8f8f8 solid;
+    margin: 5px 0 5px 0
+  }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>{{ user.nome }}</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="box box-info">
+                        <div class="box-body">
+                            <div class="col-sm-5 col-xs-6 title ">Nome:</div>
+                            <div class="col-sm-7">{{ user.nome }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 col-xs-6 title ">Sobrenome:</div>
+                            <div class="col-sm-7">{{ user.sobrenome }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 col-xs-6 title ">Criação da conta:</div>
+                            <div class="col-sm-7">{{ data_formatada }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 col-xs-6 title ">Nascimento:</div>
+                            <div class="col-sm-7">{{ user.data_aniversario }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 col-xs-6 title ">Email:</div>
+                            <div class="col-sm-7">{{ user.email }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 col-xs-6 title ">Tel.:</div>
+                            <div class="col-sm-7">{{ user.numero_telefone }}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

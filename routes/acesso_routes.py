@@ -43,6 +43,7 @@ def register():
         return redirect(url_for('index.index'))
 
     return render_template('usuario/cadastro.html')
+
 @acessoRoutes.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -53,7 +54,8 @@ def login():
         
         if user and bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
             session['user_id'] = user.id
-            return render_template('index.html')
+            return redirect(url_for('index.index'))
+
         else:
             error_message = "E-mail ou senha incorretos."
             return render_template('usuario/login.html', error_message=error_message)
@@ -63,4 +65,4 @@ def login():
 @acessoRoutes.route('/logout')
 def logout():
     session.clear()
-    return render_template('usuario/login.html')
+    return redirect(url_for('index.index'))

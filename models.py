@@ -12,6 +12,7 @@ class User(db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     data_aniversario = db.Column(db.Date)
     numero_telefone = db.Column(db.String(20))
+    creation_date_account = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"

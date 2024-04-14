@@ -4,7 +4,7 @@ from routes.acesso_routes import acessoRoutes
 from routes.password_routes import passwordRoutes
 from models import db
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='templates/static')
 app.secret_key = 'chaveSecreta'
 
 
