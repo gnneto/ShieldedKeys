@@ -17,12 +17,12 @@ def register():
         data_aniversario = datetime.strptime(request.form['data_aniversario'], '%Y-%m-%d').date()
         numero_telefone = request.form['numero_telefone']
 
-        
+        # verifica no banco se o email/usuraio/telefone ja existe no banco
         existing_user_email = User.query.filter_by(email=email).first()
         existing_user_username = User.query.filter_by(username=username).first()
         existing_user_telefone = User.query.filter_by(numero_telefone=numero_telefone).first()
 
-        # verifica se o email/usuraio/telefone ja existe no banco
+        # msg de erro se o email/usuraio/telefone ja exixstir no banco
         if existing_user_email:
             error_msg = "E-mail já está em uso. Por favor, escolha outro."
             return render_template('usuario/cadastro.html', error=error_msg)

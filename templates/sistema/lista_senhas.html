@@ -6,11 +6,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <div class="container mt-5">
-        <p>ID CONECTADO: <strong>{{ user_id }}</strong></p>
-        <h1 class="mb-4">Lista de Sites com Senhas Salvas</h1>
+        <h1 class="mb-4">Minhas senhas</h1>
         <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addPasswordModal">
             Adicionar Nova Senha
         </button>
+
         <!-- card de senhas -->
         <div class="row">
             {% for password in passwords %}
@@ -25,9 +25,28 @@
                             <input type="hidden" name="password_id" value="{{ password.id }}">
                             <input type="text" class="form-control mb-2" name="securityPhrase" placeholder="Frase de Segurança">
                             <button type="button" class="btn btn-primary btn-exibir-senha" data-password-id="{{ password.id }}">Exibir Senha</button>
-                            <a class="btn btn-danger btn-deletar-card" href="/deletarSenha/{{ password.id }}" data-password-id="{{ password.id }}">Deletar</a>
-                        </form>
 
+                            <!-- modal deletar senha -->
+                            <div class="modal fade" id="confirmDeleteModal{{ password.id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ password.id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmDeleteModalLabel{{ password.id }}">Confirmar exclusão</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Tem certeza de que deseja excluir esta senha?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <a href="/deletarSenha/{{ password.id }}" class="btn btn-danger">Excluir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- fim modal deletar senha -->
+                            <button type="button" class="btn btn-danger btn-deletar-card" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ password.id }}" data-password-id="{{ password.id }}">Deletar</button>
+                        </form>
                     </div>
                 </div>
             </div>
