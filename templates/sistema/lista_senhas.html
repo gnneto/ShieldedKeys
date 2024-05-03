@@ -67,24 +67,24 @@
                 <div class="modal-body">
                     <form action="/cadastrarSenha" method="POST">
                         <div class="mb-3">
-                            <label for="siteName" class="form-label">Nome do Site</label>
+                            <label for="siteName" class="form-label">Nome do Site *</label>
                             <input type="text" class="form-control" id="siteName" name="siteName" required>
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Nome de Usuário</label>
-                            <input type="text" class="form-control" id="username" name="username">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Opcional">
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Senha</label>
+                            <label for="password" class="form-label">Senha *</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <div class="mb-3">
-                            <label for="securityPhrase" class="form-label">Frase de Segurança</label>
+                            <label for="securityPhrase" class="form-label">Frase de Segurança *</label>
                             <input type="text" class="form-control" id="securityPhrase" name="securityPhrase" required>
                         </div>
                         <div class="mb-3">
-                            <label for="url" class="form-label">url</label>
-                            <input type="text" class="form-control" id="url" name="url" required>
+                            <label for="url" class="form-label">URL Site</label>
+                            <input type="text" class="form-control" id="url" name="url" placeholder="Opcional">
                         </div>
                         <button type="submit" class="btn btn-primary">Salvar Senha</button>
                     </form>

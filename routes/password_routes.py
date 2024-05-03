@@ -51,16 +51,16 @@ def exibirSenha(password_id):
         
         # teste de segurança das senhas
         password_hash = password.password_hash.replace(telefone, '').replace(senha_hash, '')
-        print('password_hash', password_hash)
+        # print('password_hash', password_hash)
         
         password_plain = base64.b64decode(password_hash.encode()).decode()
-        print('password_plain antes ', password_plain)
+        # print('password_plain antes ', password_plain)
 
         password_plain = password_plain.replace(telefone, "").replace(senha_hash, "")
-        print('password_plain depois ', password_plain)
+        # print('password_plain depois ', password_plain)
         senhaPura = base64.b64decode(password_plain)
         senhaP = senhaPura.decode('utf-8')
-        print(senhaPura)
+        # print(senhaPura)
         password_plain = senhaP
         return jsonify({'senha': password_plain})
     else:

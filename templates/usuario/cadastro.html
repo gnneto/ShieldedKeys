@@ -89,12 +89,13 @@
         var avisoSenha = document.getElementById("avisoSenha");
         var avisoPwd = document.getElementById("avisoPwd");
 
-        if (!validarSenha(password)) {
-          avisoSenha.classList.remove("d-none");
-          return false;
-        } else {
-          avisoSenha.classList.add("d-none");
-        }
+        // BREVE AJUSTE
+        //if (!validarSenha(password)) {
+        //  avisoSenha.classList.remove("d-none");
+        //  return false;
+        //} else {
+         // avisoSenha.classList.add("d-none");
+       // }
 
         if (password != confirmarSenha) {
           avisoPwd.classList.remove("d-none");
