@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from routes.index_routes import baseIndex
 from routes.acesso_routes import acessoRoutes
 from routes.password_routes import passwordRoutes
+from routes.leak_routes import vazamentosRoutes
 from models import db
 
 app = Flask(__name__, static_folder='templates/static')
@@ -19,8 +20,7 @@ db.init_app(app)
 app.register_blueprint(baseIndex)
 app.register_blueprint(acessoRoutes)
 app.register_blueprint(passwordRoutes)
-
-
+app.register_blueprint(vazamentosRoutes)
 
 
 

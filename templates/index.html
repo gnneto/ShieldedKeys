@@ -7,7 +7,7 @@
       <div class="jumbotron">
         {% if user_logged %}
           <h1 class="display-4">Bem-vindo {{ nome }}</h1>
-            <p class="lead font-weight-bold">Confira os vazamentos de dados mais recentes clicando <a href="">aqui</a> (em breve)</p>
+            <h5><strong>Confira os vazamentos de dados mais recentes clicando <a href="{{ url_for('leak.vazamentos')}}">aqui</a></strong></h5>
           
         {% else %}
           <h1 class="display-4">Bem-vindo ao Shieldedkeys</h1>

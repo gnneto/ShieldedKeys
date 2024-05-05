@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Vazamentos{% endblock title %}
+{% block content %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<body data-bs-theme="dark">
+    <div class="container">
+        <h1 class="mt-4 mb-4">Lista de Vazamentos</h1>
+        <p>Coleta de dados: <a href="https://haveibeenpwned.com/PwnedWebsites" target="_blank">Have I Been Pwned</a><br>Voce pode conferir se seu email foi vazado utilizando o <a href="https://haveibeenpwned.com">Have I Been Pwned</a></p>
+        <div class="row">
+            {% for item in dados %}
+                <div class="col-md-4 mb-4">
+                    <div class="card text-white bg-dark mb-3">
+                        <div class="card-header">{{ item["Dominio"] }}</div>
+                        <div class="card-body">
+                          <h4 class="card-title"><strong>{{ item["Nome"] }}</strong></h4>
+                          <p class="card-text"><strong>Data da Violação:</strong> {{ item["Data da Violacao"] }}</p>
+                          <p class="card-text"><strong>Quantidade Comprometida:</strong> {{ item["Contas comprometidas"] }}</p>
+                          <p class="card-text"><strong>Descrição:</strong> {{ item["Descricao"]| truncate(100) | safe }}</p>
+                          <a class="card-text" href="" data-bs-toggle="modal" data-bs-target="#modal{{ loop.index }}">VER MAIS</a>
+                        </div>
+                      </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- modal informacoes -->
+    {% for item in dados %}
+    <div class="modal fade" id="modal{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Detalhes do Vazamento</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Nome:</strong> {{ item["Nome"] }}</p>
+            <p><strong>Domínio:</strong> {{ item["Dominio"] }}</p>
+            <p><strong>Data da Violação:</strong> {{ item["Data da Violacao"] }}</p>
+            <p><strong>Dados Comprometidos:</strong> {{ item["Dados comprometidos"] }}</p>
+            <p><strong>Quantidade Comprometida:</strong> {{ item["Contas comprometidas"] }}</p>
+            <p><strong>Descrição:</strong> {{ item["Descricao"] | safe }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- fim moodal informacoes -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+{% endblock content %}
