@@ -1,61 +1,61 @@
 {% extends "base.html" %}
 
-{% block title %}Minhas senhas{% endblock title %}Minhas senhas
+{% block title %}Minhas senhas{% endblock title %}
 {% block content %}
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <div class="container mt-5">
-        <h1 class="mb-4">Minhas senhas</h1>
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addPasswordModal">
-            Adicionar Nova Senha
-        </button>
+<div class="container mt-5">
+    <h1 class="mb-4">Minhas senhas</h1>
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addPasswordModal">
+        Adicionar Nova Senha
+    </button>
 
-        <!-- card de senhas -->
-        <div class="row">
-            {% for password in passwords %}
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h3 class="card-title">{{ password.site_name }}</h3>
-                        <p class="card-text"><strong>User/ Email: </strong>{{ password.username }}<br><strong>Senha: </strong>
-                            <span id="senha-{{ password.id }}">*******</span>
-                        </p>
-                        <form class="d-inline-block" id="formSenha{{ password.id }}">
-                            <input type="hidden" name="password_id" value="{{ password.id }}">
-                            <input type="text" class="form-control mb-2" name="securityPhrase" placeholder="Frase de Segurança">
-                            <button type="button" class="btn btn-primary btn-exibir-senha" data-password-id="{{ password.id }}">Exibir Senha</button>
-
-                            <!-- modal deletar senha -->
-                            <div class="modal fade" id="confirmDeleteModal{{ password.id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ password.id }}" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="confirmDeleteModalLabel{{ password.id }}">Confirmar exclusão</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Tem certeza de que deseja excluir esta senha?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <a href="/deletarSenha/{{ password.id }}" class="btn btn-danger">Excluir</a>
-                                        </div>
+    <!-- card de senhas -->
+    <div class="row">
+        {% for password in passwords %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">{{ password.site_name }}</h3>
+                    <p class="card-text"><strong>User/ Email: </strong>{{ password.username }}<br><strong>Senha: </strong>
+                        <span id="senha-{{ password.id }}">*************</span>
+                    </p>
+                    <form class="d-inline-block" id="formSenha{{ password.id }}">
+                        <input type="hidden" name="password_id" value="{{ password.id }}">
+                        <input type="text" class="form-control mb-2" name="securityPhrase" placeholder="Frase de Segurança">
+                        <button type="button" class="btn btn-primary btn-exibir-senha" data-password-id="{{ password.id }}">Exibir Senha</button>
+                        
+                        
+                        <!-- modal deletar senha -->
+                        <div class="modal fade" id="confirmDeleteModal{{ password.id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ password.id }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmDeleteModalLabel{{ password.id }}">Confirmar exclusão</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Tem certeza de que deseja excluir esta senha?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a href="/deletarSenha/{{ password.id }}" class="btn btn-danger">Excluir</a>
                                     </div>
                                 </div>
                             </div>
-                            <!-- fim modal deletar senha -->
-                            <button type="button" class="btn btn-danger btn-deletar-card" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ password.id }}" data-password-id="{{ password.id }}">Deletar</button>
-                        </form>
-                    </div>
+                        </div>
+                        <!-- fim modal deletar senha -->
+                        <button type="button" class="btn btn-danger btn-deletar-card" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ password.id }}" data-password-id="{{ password.id }}">Deletar</button>
+                        <div class="mt-3" id="error-message" style="display: none; color:red"></div>
+                    </form>
                 </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
+    </div>
 
-
-        
-
+    
     <!-- modal nova senha -->
     <div class="modal fade" id="addPasswordModal" tabindex="-1" aria-labelledby="addPasswordModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -76,7 +76,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Senha *</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="securityPhrase" class="form-label">Frase de Segurança *</label>
@@ -86,40 +91,68 @@
                             <label for="url" class="form-label">URL Site</label>
                             <input type="text" class="form-control" id="url" name="url" placeholder="Opcional">
                         </div>
-                        <button type="submit" class="btn btn-primary">Salvar Senha</button>
+                        <button type="submit" id="password" class="btn btn-primary">Salvar Senha</button>
+                        <a id="gerarSenha" class="btn btn-secondary">Gera Senha</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        document.querySelectorAll('.btn-exibir-senha').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const passwordId = this.getAttribute('data-password-id');
-                const securityPhrase = document.querySelector(`#formSenha${passwordId} input[name="securityPhrase"]`).value;
+<script>
+    document.querySelectorAll('.btn-exibir-senha').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const passwordId = this.getAttribute('data-password-id');
+            const securityPhrase = document.querySelector(`#formSenha${passwordId} input[name="securityPhrase"]`).value;
 
-                fetch(`/exibirSenha/${passwordId}`, {
-                    method: 'POST',
-                    body: new URLSearchParams({securityPhrase}),
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Frase de segurança incorreta');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    document.querySelector(`#senha-${passwordId}`).innerText = data.senha;
-                })
-                .catch(error => {
-                    alert(error.message);
-                });
+            fetch(`/exibirSenha/${passwordId}`, {
+                method: 'POST',
+                body: new URLSearchParams({securityPhrase}),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Frase de segurança incorreta');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.querySelector(`#senha-${passwordId}`).innerText = data.senha;
+            })
+            .catch(error => {
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.innerText = error.message;
+                errorMessage.style.display = 'block';
             });
         });
-    </script>
+    });
+
+    function gerarSenha() {
+        const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+';
+        const comprimentoSenha = Math.floor(Math.random() * 11) + 15;
+        let senha = '';
+        for (let i = 0; i < comprimentoSenha; i++) {
+            const randomIndex = Math.floor(Math.random() * caracteres.length);
+            senha += caracteres[randomIndex];
+        }
+        return senha;
+    }
+    
+    document.getElementById('gerarSenha').addEventListener('click', function() {
+        const senhaGerada = gerarSenha();
+        document.getElementById('password').value = senhaGerada;
+    });
+
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.querySelector('i').classList.toggle('bi-eye');
+        this.querySelector('i').classList.toggle('bi-eye-slash');
+    });
+</script>
 
 {% endblock  %}

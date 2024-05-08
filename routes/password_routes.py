@@ -73,7 +73,6 @@ def deletarSenha(password_id):
     if password:
         db.session.delete(password)
         db.session.commit()
-        flash('Senha deletada com sucesso', 'success')
     else:
         flash('Senha não encontrada', 'danger')
     return redirect(url_for('index.listarSenhas'))
