@@ -1,4 +1,5 @@
 import base64
+import bcrypt
 from flask import Blueprint, request, redirect, url_for, flash, session, jsonify
 from models import db, Password, User
 
@@ -11,6 +12,7 @@ def cadastrarSenha():
     password_plain = request.form['password']
     security_phrase = request.form['securityPhrase']
     url = request.form['url']
+    phrase_hash = bcrypt.hashpw(security_phrase.encode(), bcrypt.gensalt())
     
     user_id = session.get('user_id')
     user = User.query.get(user_id)
@@ -28,7 +30,7 @@ def cadastrarSenha():
         site_name=site_name,
         username=username,
         password_hash=combined_base64,
-        security_phrase=security_phrase,
+        security_phrase=phrase_hash,
         url=url,
         user_id=user_id
     )
@@ -43,7 +45,7 @@ def exibirSenha(password_id):
     security_phrase = request.form['securityPhrase']
 
     # verifica a frase
-    if password.check_security_phrase(security_phrase):
+    if bcrypt.checkpw(security_phrase.encode(), password.security_phrase):
         user_id = session.get('user_id')
         user = User.query.get(user_id)
         telefone = user.numero_telefone

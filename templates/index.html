@@ -20,8 +20,15 @@
           {% else %}
             <a class="btn btn-primary btn-lg" href="{{ url_for('acesso.login')}}" role="button">Iniciar</a>
             <a class="btn btn-secondary btn-lg" href="{{ url_for('acesso.register')}}" role="button">Cadastre-se</a>
+
+            <!-- conta teste -->
+            <form id="form-login" action="{{ url_for('acesso.login') }}" method="post">
+              <h6>Para facilitar a exploração no site, uma conta de teste foi criada.</h6>
+              <input type="hidden" name="email" value="guilherme@gnneto.com">
+              <input type="hidden" name="password" value="1senha4@Conta8&Teste">
+              <button class="btn btn-secondary" type="submit">Login com conta de teste</button>
+            </form>
             
-            <p><strong>Voce pode testar o sistema com uma conta teste clicando <a href="">aqui</a></strong> (em breve)</p>
           {% endif %}
         </p>
       </div>
