@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastro{% endblock title %}
+{% block content %} 
+    <div class="container">
+        <div class="row mt-5 justify-content-center"></div>
+      <h1 class="text-center">Cadastro</h1>
+              <!-- msg de erro -->
+              {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+              {% endif %}
+      <div class="form-container">
+        <form method="POST" action="/register" onsubmit="return validateForm()">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="nome">Nome</label>
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="Pedro" required>
+            </div>
+            <div class="form-group col">
+              <label for="sobrenome">Sobrenome</label>
+              <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Silva" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="username">Nome de Usuário</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="usuario22" required>
+            </div>
+            <div class="form-group col">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="email@exemplo.com" required>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="password">Senha</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="********" required>
+              <small id="avisoSenha" class="form-text text-danger d-none">A senha deve ter pelo menos 10 caracteres e conter letras maiúsculas, letras minúsculas, números e caracteres especiais.</small>
+            </div>
+            <div class="form-group col">
+              <label for="confirmar_senha">Confirmar senha</label>
+              <input type="password" class="form-control" id="confirmar_senha" placeholder="********" required>
+              <small id="avisoPwd" class="form-text text-danger d-none">As senhas não correspondem.</small>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="data_aniversario">Data de nascimento</label>
+              <input type="date" class="form-control" id="data_aniversario" name="data_aniversario" required>
+            </div>
+            <div class="form-group col">
+              <label for="numero_telefone">Telefone</label>
+              <input type="tel" class="form-control" id="numero_telefone" name="numero_telefone" placeholder="(12) 00000-0000"  maxlength="18" oninput="formatoCell(event)" required>
+            </div>
+         </div>
+         <div class="text-ceter">
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <a class="btn btn-secondary mb-3 mt-3" href="{{ url_for('acesso.login')}}">Login</a>
+            </div>
+
+        </form>
+      </div>
+    </div>
+    
+    <script>
+      const formatoCell = (event) => {
+        let input = event.target;
+        input.value = mascaraCell(input.value);
+      }
+
+      const mascaraCell = (value) => {
+        if (!value) return "";
+        value = value.replace(/\D/g,'');
+        value = value.replace(/(\d{2})(\d)/,"($1) $2");
+        value = value.replace(/(\d)(\d{4})$/,"$1-$2");
+        return value;
+      }
+
+      function validarSenha(password) {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/;
+        return regex.test(password);
+      }
+
+      function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmarSenha = document.getElementById("confirmar_senha").value;
+        var avisoSenha = document.getElementById("avisoSenha");
+        var avisoPwd = document.getElementById("avisoPwd");
+
+        // BREVE AJUSTE
+        //if (!validarSenha(password)) {
+        //  avisoSenha.classList.remove("d-none");
+        //  return false;
+        //} else {
+         // avisoSenha.classList.add("d-none");
+       // }
+
+        if (password != confirmarSenha) {
+          avisoPwd.classList.remove("d-none");
+          return false;
+        } else {
+          avisoPwd.classList.add("d-none");
+        }
+
+        return true;
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% endblock %}

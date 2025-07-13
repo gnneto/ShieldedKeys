@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Shieldedkeys{% endblock %}
+{% block content %}
+  <body>
+    <div class="container mt-3">
+      <div class="jumbotron">
+        {% if user_logged %}
+          <h1 class="display-4">Bem-vindo {{ nome }}</h1>
+            <h5><strong>Confira os vazamentos de dados mais recentes clicando <a href="{{ url_for('leak.vazamentos')}}">aqui</a></strong></h5>
+          
+        {% else %}
+          <h1 class="display-4">Bem-vindo ao Shieldedkeys</h1>
+          <p class="lead">Shieldedkeys é uma solução de gerenciamento de senhas que ajuda você a manter suas senhas seguras e organizadas. Com Shieldedkeys, você pode facilmente gerar senhas fortes, armazená-las em um cofre seguro e acessá-las de qualquer lugar.</p>
+        {% endif %}
+        
+        <p class="lead">
+          {% if user_logged %}
+            <a class="btn btn-primary btn-lg" href="{{ url_for('index.listarSenhas')}}" role="button">Minhas senhas</a>
+          {% else %}
+            <a class="btn btn-primary btn-lg" href="{{ url_for('acesso.login')}}" role="button">Iniciar</a>
+            <a class="btn btn-secondary btn-lg" href="{{ url_for('acesso.register')}}" role="button">Cadastre-se</a>
+
+            <!-- conta teste -->
+            <form id="form-login" action="{{ url_for('acesso.login') }}" method="post">
+              <h6>Para facilitar a exploração no site, uma conta de teste foi criada.</h6>
+              <input type="hidden" name="email" value="guilherme@gnneto.com">
+              <input type="hidden" name="password" value="1senha4@Conta8&Teste">
+              <button class="btn btn-secondary" type="submit">Login com conta de teste</button>
+            </form>
+            
+          {% endif %}
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Cofre de senha seguro</h2>
+          <p>Shieldedkeys fornece um cofre de senhas seguro onde você pode armazenar todas as suas senhas. O cofre é criptografado, garantindo que suas senhas estejam protegidas contra hackers.</p>
+        </div>
+        <div class="col-md-4">
+          <h2>Gerador de senhas</h2>
+          <p>Shieldedkeys inclui um gerador de senhas que pode gerar senhas fortes para você. Você pode escolher o comprimento e a complexidade da senha, e o Shieldedkeys irá gerar uma senha exclusiva para você.</p>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+{% endblock %}
