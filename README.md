@@ -1,7 +1,7 @@
 # ShieldedKeys - Armazenamento Seguro de Senhas
 
 ## Requisitos do Sistema
-- Python 3.x [Você pode encontrar aqui](https://www.python.org/)
+- Python 3.11.0 [Você pode encontrar aqui](https://www.python.org/downloads/release/python-3110/)
 - Bibliotecas Python (especificadas no requirements.txt)
 
 # Como Começar
@@ -10,7 +10,7 @@
 1. Crie e ative um ambiente virtual para isolar as dependências do projeto:
 - **Windows**
 ```sh
-python -m venv venv
+python -3.11 -m venv venv
 venv\Scripts\activate
 ```
 
@@ -20,7 +20,7 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-2. Clone o repositório para sua máquina local: `https://github.com/gnneto/shielded-keys.git`
+2. Clone o repositório para sua máquina local: `https://github.com/gnneto/ShieldedKeys-main.git`
 3. Configure o ambiente virtual e instale as dependências utilizando `pip install -r requirements.txt`.
 4. Inicie o servidor de desenvolvimento: `python app.py`.
 

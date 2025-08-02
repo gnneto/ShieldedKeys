@@ -12,6 +12,7 @@ __pycache__/
 
 # C extensions
 *.so
+vercel.json
 
 # Distribution / packaging
 .Python
@@ -165,3 +166,5 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
+
+.vercel
