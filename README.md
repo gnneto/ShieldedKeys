@@ -20,7 +20,7 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-2. Clone o repositório para sua máquina local: `https://github.com/gnneto/ShieldedKeys-main.git`
+2. Clone o repositório para sua máquina local: `https://github.com/gnneto/ShieldedKeys.git`
 3. Configure o ambiente virtual e instale as dependências utilizando `pip install -r requirements.txt`.
 4. Inicie o servidor de desenvolvimento: `python app.py`.
 
